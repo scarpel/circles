@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+  html, body{
+    font-family: var(--font-poppins);
+  }
+
+  .sora{
+    font-family: var(--font-sora);
+  }
+
+  .flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .text-gradient{
+    background: linear-gradient(to right, #D653B0 0%, #F29360 20%, #E3BD34 40%, #91D26A 60%, #3CCBC9 80%, #0D91E3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@layer components{
+  .chat-container{
+    @apply bg-white rounded-xl h-full;
+  }
+
+  .text-input{
+    @apply bg-inputGray border border-darkerInputGray;
+  }
+}
