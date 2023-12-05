@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    BACKEND_URL: process.env.BACKEND_URL,
-    ACCESS_TOKEN: process.env.ACCESS_TOKEN,
+    SERVER_BACKEND_URL: process.env.SERVER_BACKEND_URL,
+    CLIENT_BACKEND_URL: process.env.CLIENT_BACKEND_URL,
   },
 };
 

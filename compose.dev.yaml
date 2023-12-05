@@ -28,7 +28,7 @@ services:
   server:
     build:
       context: ./circles-backend
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     container_name: nest-server
     ports:
       - 4000:4000
@@ -44,7 +44,7 @@ services:
   client:
     build:
       context: ./circles-frontend
-      dockerfile: Dockerfile
+      dockerfile: dev.Dockerfile
     container_name: client
     ports:
       - 3000:3000

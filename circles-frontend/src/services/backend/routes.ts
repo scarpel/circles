@@ -5,7 +5,7 @@ export function mergePaths(...args: string[]) {
   return args.join("/");
 }
 
-export default {
+const routes = {
   Main: {
     logIn: "login",
     signUp: "signup",
@@ -21,3 +21,5 @@ export default {
     signUp: mergePaths(AUTH_ROUTE, "signup"),
   },
 };
+
+export default routes;

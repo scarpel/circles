@@ -6,7 +6,9 @@ import React from "react";
 import { useQuery } from "react-query";
 
 export default function withConversation<TProps>(Component: IComponent) {
-  return (props: TProps & { conversationSearchId: string | null }) => {
+  const WrappedConversation = (
+    props: TProps & { conversationSearchId: string | null }
+  ) => {
     // States
     const dispatch = useAppDispatch();
     const conversation = useAppSelector(
@@ -50,4 +52,8 @@ export default function withConversation<TProps>(Component: IComponent) {
       />
     );
   };
+
+  WrappedConversation.displayName = "WrappedConversation";
+
+  return WrappedConversation;
 }

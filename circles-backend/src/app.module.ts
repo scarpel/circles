@@ -30,7 +30,13 @@ import { UsersModule } from './modules/users/users.module';
       }),
       inject: [ConfigService],
     }),
-    RedisModule.register({}),
+    RedisModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        url: configService.get('REDIS_URL'),
+      }),
+      inject: [ConfigService],
+    }),
     AuthModule,
     ConversationModule,
     UsersModule,

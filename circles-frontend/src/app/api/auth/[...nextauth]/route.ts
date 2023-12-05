@@ -11,15 +11,18 @@ async function doRefreshToken(refreshToken: string) {
   try {
     if (!refreshToken) throw new Error();
 
-    const response = await fetch(`${process.env.BACKEND_URL}/auth/refresh`!, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        refreshToken,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.SERVER_BACKEND_URL}/auth/refresh`!,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          refreshToken,
+        }),
+      }
+    );
 
     if (!response.ok) throw new Error();
 
@@ -51,7 +54,7 @@ export const authOptions: AuthOptions = {
           storedRefreshTokens = {};
 
           const response = await fetch(
-            `${process.env.BACKEND_URL}/auth/signin`!,
+            `${process.env.SERVER_BACKEND_URL}/auth/signin`!,
             {
               method: "POST",
               headers: {

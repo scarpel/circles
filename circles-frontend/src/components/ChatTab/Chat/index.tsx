@@ -13,15 +13,14 @@ const Components = {
 
 export default function Chat({ conversationPayload, ...props }: IChatProps) {
   // States
+  const { type, messages } = conversationPayload || {};
+
   const user = useAppSelector(({ auth }) => auth.user);
-  const Component = useMemo(
-    () => Components[conversationPayload.type],
-    [conversationPayload.type]
-  );
+  const Component = useMemo(() => Components[conversationPayload.type], [type]);
 
   const sortedMessages = useMemo(
     () => sortConversationMessages(conversationPayload, user!),
-    [conversationPayload.messages]
+    [messages]
   );
 
   return Component ? (

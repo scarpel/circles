@@ -158,42 +158,49 @@ export default function Chat() {
     []
   );
 
-  const configSocket = useCallback(async (accessToken?: string) => {
-    try {
-      if (!accessToken) return;
+  const configSocket = useCallback(
+    async (accessToken?: string) => {
+      try {
+        if (!accessToken) return;
 
-      socketClient.initialize(accessToken);
-      await socketClient.connect();
+        socketClient.initialize(accessToken);
+        await socketClient.connect();
 
-      await socketClient.registerEvent(
-        SocketEvents.MessageReceive,
-        onNewMessage
-      );
+        await socketClient.registerEvent(
+          SocketEvents.MessageReceive,
+          onNewMessage
+        );
 
-      await socketClient.registerEvent(
-        SocketEvents.MessageReceipt,
-        onMessageReceipt
-      );
+        await socketClient.registerEvent(
+          SocketEvents.MessageReceipt,
+          onMessageReceipt
+        );
 
-      await socketClient.registerEvent(
-        SocketEvents.ConversationsDeliverSync,
-        onDeliverSync
-      );
+        await socketClient.registerEvent(
+          SocketEvents.ConversationsDeliverSync,
+          onDeliverSync
+        );
 
-      await socketClient.registerEvent(SocketEvents.Disconnect, () => {
-        setIsLoading(true);
-      });
+        await socketClient.registerEvent(SocketEvents.Disconnect, () => {
+          setIsLoading(true);
+        });
 
-      return (await new Promise((res) =>
-        socketClient.emitEvent(SocketEvents.MessagesInitial, null, (values) => {
-          return res(values);
-        })
-      )) as TInitialConversationPayload[];
-    } catch (err) {
-      console.error("Unable to connect to socket", err);
-      await signOut();
-    }
-  }, []);
+        return (await new Promise((res) =>
+          socketClient.emitEvent(
+            SocketEvents.MessagesInitial,
+            null,
+            (values) => {
+              return res(values);
+            }
+          )
+        )) as TInitialConversationPayload[];
+      } catch (err) {
+        console.error("Unable to connect to socket", err);
+        await signOut();
+      }
+    },
+    [onNewMessage, onMessageReceipt, onDeliverSync]
+  );
 
   const initialize = useCallback(
     async (accessToken: string, doConfigSocket?: boolean) => {

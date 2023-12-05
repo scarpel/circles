@@ -63,7 +63,7 @@ export default function UserAvatar({
   // Render
   const renderAvatar = () =>
     user.avatar && showAvatar ? (
-      <img
+      <Image
         src={user.avatar}
         alt={user.name}
         className="w-full h-full"
